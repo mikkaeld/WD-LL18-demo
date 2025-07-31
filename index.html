@@ -6,51 +6,60 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="style.css">
+  <!-- Marked.js for Markdown parsing -->
+  <script type="module">
+    import { marked } from 'https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js';
+    window.marked = marked;
+  </script>
 </head>
 <body>
-  <main>
-    <h1>
-      <span class="material-symbols-outlined icon-main">chef_hat</span>
-      Chef's Twist
-    </h1>
-
-    <button id="random-btn" class="main-btn">
-      <span class="material-symbols-outlined icon-btn">shuffle</span>
-      Surprise Me Again!
-    </button>
-
-    <!-- Only show this container if there are saved recipes (handled in JS) -->
-    <div id="saved-recipes-container" style="display:none;">
-      <h3>Saved Recipes</h3>
-      <ul id="saved-recipes-list"></ul>
-    </div>
-
-    <div id="recipe-display"></div>
-
-    <div class="remix-container">
-      <div class="remix-controls">
-        <label for="remix-theme">
-          <span class="material-symbols-outlined icon-label">stars_2</span>
-          Choose a remix theme:
-        </label>
-        <div class="select-container">
-          <select id="remix-theme">
-            <option>Make it vegan</option>
-            <option>Turn it into a dessert</option>
-            <option>Turn it into a pizza</option>
-            <option>Remix it for breakfast</option>
-            <option>Make it work in a dorm room with a microwave</option>
-            <option>Make this dish using only ingredients you could find at a gas station</option>
-          </select>
-          <button id="remix-btn" class="accent-btn">
-            <span class="material-symbols-outlined icon-btn">wand_stars</span>
-            Remix!
-          </button>
+  <div class="container">
+    <header class="app-header">
+      <h1 class="app-title">
+        <span class="material-symbols-outlined icon-main">chef_hat</span>
+        Meal Discovery
+      </h1>
+      <p class="app-subtitle">Discover, remix, and save delicious recipes</p>
+    </header>
+    <div class="main-grid">
+      <section class="main-content">
+        <button id="random-btn" class="btn btn-primary btn-lg" aria-label="Get a random meal recipe">
+          <span class="material-symbols-outlined icon-btn">shuffle</span>
+          Get Random Meal
+        </button>
+        <div id="recipe-display"></div>
+        <div class="remix-container card">
+          <div class="remix-controls">
+            <label for="remix-theme" class="remix-label">
+              <span class="material-symbols-outlined icon-label">stars_2</span>
+              Choose a remix theme:
+            </label>
+            <div class="select-container">
+              <select id="remix-theme" class="remix-select">
+                <option>Make it vegan</option>
+                <option>Turn it into a dessert</option>
+                <option>Turn it into a pizza</option>
+                <option>Remix it for breakfast</option>
+                <option>Make it work in a dorm room with a microwave</option>
+                <option>Make this dish using only ingredients you could find at a gas station</option>
+              </select>
+              <button id="remix-btn" class="btn btn-secondary" aria-label="Remix current recipe with AI">
+                <span class="material-symbols-outlined icon-btn">wand_stars</span>
+                Remix Recipe
+              </button>
+            </div>
+          </div>
+          <div id="remix-output" class="remix-box"></div>
         </div>
-      </div>
-      <div id="remix-output" class="remix-box"></div>
+      </section>
+      <aside class="sidebar">
+        <div id="saved-recipes-container" class="card sidebar-card" style="display:none;">
+          <h3 class="sidebar-title">Your Saved Recipes</h3>
+          <ul id="saved-recipes-list"></ul>
+        </div>
+      </aside>
     </div>
-  </main>
+  </div>
   <script src="secrets.js"></script>
   <script src="script.js"></script>
 </body>

@@ -1,0 +1,509 @@
+{
+  "project": {
+    "name": "Meal Discovery App",
+    "description": "A sleek meal discovery and recipe management application",
+    "designSystem": "shadcn-inspired"
+  },
+  "theme": {
+    "colors": {
+      "background": "hsl(0 0% 100%)",
+      "foreground": "hsl(222.2 84% 4.9%)",
+      "card": "hsl(0 0% 100%)",
+      "cardForeground": "hsl(222.2 84% 4.9%)",
+      "popover": "hsl(0 0% 100%)",
+      "popoverForeground": "hsl(222.2 84% 4.9%)",
+      "primary": "hsl(221.2 83.2% 53.3%)",
+      "primaryForeground": "hsl(210 40% 98%)",
+      "secondary": "hsl(210 40% 96%)",
+      "secondaryForeground": "hsl(222.2 84% 4.9%)",
+      "muted": "hsl(210 40% 96%)",
+      "mutedForeground": "hsl(215.4 16.3% 46.9%)",
+      "accent": "hsl(210 40% 96%)",
+      "accentForeground": "hsl(222.2 84% 4.9%)",
+      "destructive": "hsl(0 84.2% 60.2%)",
+      "destructiveForeground": "hsl(210 40% 98%)",
+      "border": "hsl(214.3 31.8% 91.4%)",
+      "input": "hsl(214.3 31.8% 91.4%)",
+      "ring": "hsl(221.2 83.2% 53.3%)"
+    },
+    "typography": {
+      "fontFamily": "Inter, system-ui, sans-serif",
+      "headings": {
+        "h1": {
+          "fontSize": "2.25rem",
+          "fontWeight": "800",
+          "lineHeight": "2.5rem",
+          "letterSpacing": "-0.025em"
+        },
+        "h2": {
+          "fontSize": "1.875rem",
+          "fontWeight": "700",
+          "lineHeight": "2.25rem",
+          "letterSpacing": "-0.025em"
+        },
+        "h3": {
+          "fontSize": "1.5rem",
+          "fontWeight": "600",
+          "lineHeight": "2rem"
+        },
+        "h4": {
+          "fontSize": "1.25rem",
+          "fontWeight": "600",
+          "lineHeight": "1.75rem"
+        }
+      },
+      "body": {
+        "fontSize": "0.875rem",
+        "lineHeight": "1.25rem"
+      },
+      "small": {
+        "fontSize": "0.75rem",
+        "lineHeight": "1rem"
+      }
+    },
+    "spacing": {
+      "containerPadding": "1.5rem",
+      "sectionGap": "3rem",
+      "componentGap": "1.5rem",
+      "elementGap": "0.75rem"
+    },
+    "borderRadius": {
+      "sm": "0.375rem",
+      "md": "0.5rem",
+      "lg": "0.75rem",
+      "xl": "1rem"
+    },
+    "shadows": {
+      "sm": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      "md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+      "lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)"
+    }
+  },
+  "layout": {
+    "structure": "single-page-app",
+    "maxWidth": "1200px",
+    "centering": true,
+    "responsive": true,
+    "breakpoints": {
+      "mobile": "640px",
+      "tablet": "768px",
+      "desktop": "1024px",
+      "large": "1280px"
+    },
+    "grid": {
+      "mobile": "1fr",
+      "tablet": "1fr 1fr",
+      "desktop": "2fr 1fr"
+    }
+  },
+  "components": {
+    "header": {
+      "type": "app-header",
+      "position": "sticky",
+      "styling": {
+        "backgroundColor": "card",
+        "borderBottom": "1px solid border",
+        "padding": "1rem containerPadding",
+        "backdropBlur": true
+      },
+      "content": {
+        "title": "Meal Discovery",
+        "subtitle": "Discover, remix, and save delicious recipes"
+      }
+    },
+    "mainContent": {
+      "type": "grid-layout",
+      "sections": [
+        {
+          "id": "meal-discovery",
+          "title": "Discover Meals",
+          "gridArea": "main",
+          "components": [
+            {
+              "type": "action-button",
+              "id": "random-meal-btn",
+              "text": "Get Random Meal",
+              "variant": "primary",
+              "size": "lg",
+              "icon": "Shuffle",
+              "styling": {
+                "width": "100%",
+                "marginBottom": "componentGap"
+              },
+              "functionality": "fetch-random-meal-from-mealdb"
+            },
+            {
+              "type": "meal-display-card",
+              "id": "current-meal",
+              "conditional": "when meal is loaded",
+              "styling": {
+                "backgroundColor": "card",
+                "border": "1px solid border",
+                "borderRadius": "lg",
+                "padding": "1.5rem",
+                "boxShadow": "md"
+              },
+              "content": [
+                {
+                  "type": "meal-image",
+                  "styling": {
+                    "width": "100%",
+                    "height": "300px",
+                    "objectFit": "cover",
+                    "borderRadius": "md",
+                    "marginBottom": "elementGap"
+                  }
+                },
+                {
+                  "type": "meal-title",
+                  "element": "h2",
+                  "styling": "typography.headings.h2"
+                },
+                {
+                  "type": "meal-category-badge",
+                  "styling": {
+                    "backgroundColor": "secondary",
+                    "color": "secondaryForeground",
+                    "padding": "0.25rem 0.75rem",
+                    "borderRadius": "sm",
+                    "fontSize": "typography.small.fontSize",
+                    "fontWeight": "500",
+                    "display": "inline-block",
+                    "marginBottom": "elementGap"
+                  }
+                },
+                {
+                  "type": "ingredients-section",
+                  "title": "Ingredients",
+                  "styling": {
+                    "marginBottom": "componentGap"
+                  },
+                  "content": {
+                    "type": "ingredients-list",
+                    "styling": {
+                      "display": "grid",
+                      "gap": "0.5rem",
+                      "marginTop": "elementGap"
+                    }
+                  }
+                },
+                {
+                  "type": "instructions-section",
+                  "title": "Instructions",
+                  "content": {
+                    "type": "instructions-text",
+                    "styling": {
+                      "lineHeight": "1.6",
+                      "color": "mutedForeground"
+                    }
+                  }
+                },
+                {
+                  "type": "action-buttons-row",
+                  "styling": {
+                    "display": "flex",
+                    "gap": "elementGap",
+                    "marginTop": "componentGap",
+                    "flexWrap": "wrap"
+                  },
+                  "buttons": [
+                    {
+                      "type": "action-button",
+                      "id": "remix-meal-btn",
+                      "text": "Remix Recipe",
+                      "variant": "secondary",
+                      "icon": "Wand2",
+                      "functionality": "remix-with-predefined-prompt"
+                    },
+                    {
+                      "type": "action-button",
+                      "id": "save-meal-btn",
+                      "text": "Save Recipe",
+                      "variant": "outline",
+                      "icon": "Heart",
+                      "functionality": "save-to-local-storage"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "saved-recipes",
+          "title": "Saved Recipes",
+          "gridArea": "sidebar",
+          "styling": {
+            "backgroundColor": "muted",
+            "borderRadius": "lg",
+            "padding": "1.5rem",
+            "height": "fit-content",
+            "position": "sticky",
+            "top": "2rem"
+          },
+          "components": [
+            {
+              "type": "section-header",
+              "title": "Your Saved Recipes",
+              "styling": "typography.headings.h3"
+            },
+            {
+              "type": "saved-recipes-list",
+              "id": "saved-recipes-container",
+              "emptyState": {
+                "text": "No saved recipes yet. Start discovering!",
+                "styling": {
+                  "color": "mutedForeground",
+                  "textAlign": "center",
+                  "padding": "2rem 0"
+                }
+              },
+              "itemTemplate": {
+                "type": "saved-recipe-card",
+                "styling": {
+                  "backgroundColor": "card",
+                  "border": "1px solid border",
+                  "borderRadius": "md",
+                  "padding": "1rem",
+                  "marginBottom": "elementGap",
+                  "transition": "all 0.2s ease"
+                },
+                "hoverEffect": {
+                  "boxShadow": "md",
+                  "transform": "translateY(-1px)"
+                },
+                "content": [
+                  {
+                    "type": "recipe-thumbnail",
+                    "styling": {
+                      "width": "60px",
+                      "height": "60px",
+                      "borderRadius": "sm",
+                      "objectFit": "cover",
+                      "float": "left",
+                      "marginRight": "elementGap"
+                    }
+                  },
+                  {
+                    "type": "recipe-info",
+                    "content": [
+                      {
+                        "type": "recipe-name",
+                        "element": "h4",
+                        "styling": {
+                          "fontSize": "0.875rem",
+                          "fontWeight": "600",
+                          "marginBottom": "0.25rem"
+                        }
+                      },
+                      {
+                        "type": "recipe-category",
+                        "styling": {
+                          "fontSize": "0.75rem",
+                          "color": "mutedForeground"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "delete-button",
+                    "variant": "ghost",
+                    "size": "sm",
+                    "icon": "Trash2",
+                    "styling": {
+                      "position": "absolute",
+                      "top": "0.5rem",
+                      "right": "0.5rem",
+                      "color": "destructive"
+                    },
+                    "functionality": "remove-from-saved-recipes"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "buttonVariants": {
+    "primary": {
+      "backgroundColor": "primary",
+      "color": "primaryForeground",
+      "border": "none",
+      "borderRadius": "md",
+      "fontWeight": "500",
+      "transition": "all 0.2s ease",
+      "hover": {
+        "backgroundColor": "hsl(221.2 83.2% 48%)",
+        "transform": "translateY(-1px)",
+        "boxShadow": "md"
+      }
+    },
+    "secondary": {
+      "backgroundColor": "secondary",
+      "color": "secondaryForeground",
+      "border": "none",
+      "borderRadius": "md",
+      "fontWeight": "500",
+      "transition": "all 0.2s ease",
+      "hover": {
+        "backgroundColor": "hsl(210 40% 92%)"
+      }
+    },
+    "outline": {
+      "backgroundColor": "transparent",
+      "color": "foreground",
+      "border": "1px solid border",
+      "borderRadius": "md",
+      "fontWeight": "500",
+      "transition": "all 0.2s ease",
+      "hover": {
+        "backgroundColor": "accent",
+        "color": "accentForeground"
+      }
+    },
+    "ghost": {
+      "backgroundColor": "transparent",
+      "color": "foreground",
+      "border": "none",
+      "borderRadius": "md",
+      "fontWeight": "500",
+      "transition": "all 0.2s ease",
+      "hover": {
+        "backgroundColor": "accent",
+        "color": "accentForeground"
+      }
+    }
+  },
+  "buttonSizes": {
+    "sm": {
+      "height": "2rem",
+      "padding": "0 0.75rem",
+      "fontSize": "0.75rem"
+    },
+    "md": {
+      "height": "2.5rem",
+      "padding": "0 1rem",
+      "fontSize": "0.875rem"
+    },
+    "lg": {
+      "height": "3rem",
+      "padding": "0 1.5rem",
+      "fontSize": "1rem"
+    }
+  },
+  "animations": {
+    "fadeIn": {
+      "keyframes": "0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); }",
+      "duration": "0.3s",
+      "easing": "ease-out"
+    },
+    "slideIn": {
+      "keyframes": "0% { opacity: 0; transform: translateX(-20px); } 100% { opacity: 1; transform: translateX(0); }",
+      "duration": "0.4s",
+      "easing": "ease-out"
+    },
+    "scaleIn": {
+      "keyframes": "0% { opacity: 0; transform: scale(0.95); } 100% { opacity: 1; transform: scale(1); }",
+      "duration": "0.2s",
+      "easing": "ease-out"
+    }
+  },
+  "interactions": {
+    "randomMealButton": {
+      "onClick": {
+        "action": "fetchRandomMeal",
+        "apiEndpoint": "https://www.themealdb.com/api/json/v1/1/random.php",
+        "loadingState": {
+          "text": "Finding your meal...",
+          "disableButton": true,
+          "showSpinner": true
+        },
+        "successAnimation": "fadeIn",
+        "errorHandling": {
+          "showToast": true,
+          "message": "Failed to fetch meal. Please try again."
+        }
+      }
+    },
+    "remixMealButton": {
+      "onClick": {
+        "action": "remixRecipe",
+        "prompt": "Take this recipe and create a healthier version with substituted ingredients, maintaining the same flavor profile but reducing calories and increasing nutritional value.",
+        "aiProvider": "openai",
+        "loadingState": {
+          "text": "Remixing recipe...",
+          "disableButton": true
+        }
+      }
+    },
+    "saveMealButton": {
+      "onClick": {
+        "action": "saveRecipe",
+        "storage": "localStorage",
+        "key": "savedRecipes",
+        "successFeedback": {
+          "buttonText": "Saved!",
+          "icon": "Check",
+          "duration": 2000
+        }
+      }
+    },
+    "deleteSavedRecipe": {
+      "onClick": {
+        "action": "deleteRecipe",
+        "confirmation": false,
+        "animation": "slideOut",
+        "updateStorage": true
+      }
+    }
+  },
+  "responsiveDesign": {
+    "mobile": {
+      "layout": "single-column",
+      "savedRecipes": "below-main-content",
+      "buttonSizes": "md",
+      "containerPadding": "1rem"
+    },
+    "tablet": {
+      "layout": "two-column",
+      "gridRatio": "1fr 1fr",
+      "savedRecipes": "sidebar"
+    },
+    "desktop": {
+      "layout": "two-column",
+      "gridRatio": "2fr 1fr",
+      "savedRecipes": "sticky-sidebar"
+    }
+  },
+  "accessibility": {
+    "focusStyles": {
+      "outline": "2px solid ring",
+      "outlineOffset": "2px"
+    },
+    "ariaLabels": {
+      "randomMealButton": "Get a random meal recipe",
+      "remixButton": "Remix current recipe with AI",
+      "saveButton": "Save recipe to favorites",
+      "deleteButton": "Delete saved recipe"
+    },
+    "keyboardNavigation": true,
+    "screenReaderSupport": true,
+    "colorContrast": "WCAG AA compliant"
+  },
+  "performance": {
+    "lazyLoading": true,
+    "imageOptimization": true,
+    "cacheStrategy": "localStorage for saved recipes",
+    "bundleSize": "minimize dependencies"
+  },
+  "implementation": {
+    "framework": "vanilla-js-or-react",
+    "cssFramework": "tailwind-or-custom-css",
+    "icons": "lucide-react or feather-icons",
+    "apiIntegration": "fetch API for TheMealDB",
+    "stateManagement": "localStorage + in-memory state",
+    "buildTool": "vite-or-webpack"
+  }
+}
